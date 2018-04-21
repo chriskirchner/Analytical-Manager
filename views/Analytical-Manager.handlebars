@@ -1,0 +1,295 @@
+
+<h1>Analytical Resource Manager</h1>
+
+<!--Show Search Form -->
+<table>
+    <thead>
+    <tr>
+        <td class="search" id="method-resource">Method</td>
+        <td class="search" id="instrument-resource">Instrument</td>
+        <td class="search" id="lot-resource">Lot</td>
+        <td class="search" id="analyst-resource">Analyst</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <form id="search-form">
+            <td><input type="text" name="analyte"
+                       value="Enter Analyte"
+                       onfocus="if (this.value == 'Enter Analyte')
+                       this.value = '';"
+                       onblur="if (this.value == '')
+                       this.value='Enter Analyte';"></td>
+            <td><input type="text" name="instrument"
+                       value="Enter Instrument Type"
+                       onfocus="if (this.value == 'Enter Instrument Type')
+                       this.value='';"
+                       onblur="if (this.value == '')
+                       this.value='Enter Instrument Type';"></td>
+            <td><input type="text" name="lot"
+                       value="Enter Lot ID"
+                       onfocus="if (this.value == 'Enter Lot ID')
+                       this.value='';"
+                       onblur="if (this.value == '')
+                       this.value='Enter Lot ID';"></td>
+            <td class="searchbutton"><input class="search" type="submit" value="Search Resources"></td>
+        </form>
+    </tr>
+    <tr><td class="directions" colspan="4">Search for method, instrument, lot, and analyst availability (e.g. Enter drug material analyte, 'flurazepam', and lot,'2000-01-01', to analyze on a given instrument, HPLC; Method that is not available to analyze analyte on given instrument will show up in Red).  Please use Chrome Browser.  Note: because of queries, some tables will not add items if attributes do not match other tables or are incorrect (e.g. in Test table).</td></tr>
+    </tbody>
+
+</table>
+
+
+
+<!--
+http://stackoverflow.com/questions/4035966/create-a-html-table-where-each-tr-is-a-form
+-->
+<!--Drug Material Table -->
+
+<h2>Drug Material</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Lot</th>
+        <th>Quantity (g)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="form">
+        <form action="/insert" method="post">
+            <td><input type="text" name="name"></td>
+            <td><input type="text" name="lot"></td>
+            <td><input type="number" name="qty"></td>
+            <td><input type="submit" name="drug_material" value="+"></td>
+        </form>
+    </tr>
+    <!--Show Drug Material info form database #for each row -->
+    {{#if drug_material}}
+        {{#each drug_material}}
+            <tr>
+                <form action="/update" method="post">
+                    <td><input type="text" name="name" value="{{this.name}}"></td>
+                    <td class="static">{{this.lot}}</td>
+                    <td><input type="number" name="qty" value="{{this.qty}}"></td>
+                    <td><input type="hidden" name="lot" value="{{this.lot}}">
+                    <input type="submit" name="drug_material" value="+"></td>
+                </form>
+                <form  action="/delete" method="post">
+                    <td class="button"><input type="hidden"
+                                              name="lot" value="{{this.lot}}">
+                    <td><input type="submit" name="drug_material" value="-"></td>
+                </form>
+            </tr>
+        {{/each}}
+    {{/if}}
+    </tbody>
+</table>
+
+<!--Show Instrument Resources Table -->
+<h2>Instrument Resources</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Instrument ID</th>
+        <th>Qualification Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <form action="/insert" method="post">
+            <td><input type="text" name="name"></td>
+            <td><input type="number" name="iid"></td>
+            <td><input type="date" name="date_qualified"></td>
+            <td><input type="submit" name="instrument" value="+"></td>
+        </form>
+    </tr>
+    <!--Show instrument info form database #for each row -->
+    {{#if instrument}}
+        {{#each instrument}}
+            <tr>
+            <form action="/update" method="post">
+                <td class="static">{{this.name}}</td>
+                <td class="static">{{this.iid}}</td>
+                <td><input type="date" name="date_qualified" value="{{this.date_qualified}}"></td>
+                <td><input type="hidden" name="name" value="{{this.name}}">
+                <input type="hidden" name="iid" value="{{this.iid}}">
+                <input type="submit" name="instrument" value="+"></td>
+            </form>
+            <form action="/delete" method="post">
+                <td><input type="hidden" name="iid" value="{{this.iid}}">
+                <input type="submit" name="instrument" value="-"></td>
+            </form>
+            </tr>
+        {{/each}}
+    {{/if}}
+    </tbody>
+</table>
+
+<!--Show Drug Material info form database #for each row -->
+<h2>Method Resources</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Analyte</th>
+        <th>Method ID</th>
+        <th>Instrument Type</th>
+        <th>File</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="form">
+        <form action="/insert" method="post">
+            <td><input type="text" name="analyte"></td>
+            <td><input type="number" name="mid"></td>
+            <td><input type="text" name="instrument_type"></td>
+            <td><input type="file" name="file"></td>
+            <td><input type="submit" name="method" value="+"></td>
+        </form>
+    </tr>
+    <!--Show method info form database for #each row -->
+    {{#if method}}
+        {{#each method}}
+            <tr>
+                <form action="/delete" method="post">
+                    <td class="static">{{this.analyte}}</td>
+                    <td class="static">{{this.mid}}</td>
+                    <td class="static">{{this.instrument_type}}</td>
+                    <td class="static">{{this.file}}</td>
+                    <td><input type="hidden" name="mid" value="{{this.mid}}">
+                    <input type="submit" name="method" value="-"></td>
+                </form>
+            </tr>
+        {{/each}}
+    {{/if}}
+    </tbody>
+</table>
+
+<!--Analyst Resources -->
+<h2>Analyst Resource</h2>
+<table>
+    <thead>
+    <tr class="form">
+        <th>Analyst ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <form action="/insert" method="post">
+            <td class="empty"></td>
+            <td><input type="text" name="first_name"></td>
+            <td><input type="text" name="last_name"></td>
+            <td><input type="submit" name="analyst" value="+"></td>
+        </form>
+    </tr>
+    <!--Show analyst info form database for #each row -->
+    {{#if analyst}}
+        {{#each analyst}}
+            <tr>
+                <form action="/update" method="post">
+                    <td class="static">{{this.aid}}</td>
+                    <td><input type="text" name="first_name" value="{{this.first_name}}"></td>
+                    <td><input type="text" name="last_name" value="{{this.last_name}}"></td>
+                    <td><input type="hidden" name="aid" value="{{this.aid}}">
+                    <input type="submit" name="analyst" value="+"></td>
+                </form>
+                <form action="/delete" method="post">
+                    <td><input type="hidden" name="aid" value="{{this.aid}}">
+                    <input type="submit" name="analyst" value="-"></td>
+                </form>
+            </tr>
+        {{/each}}
+    {{/if}}
+    </tbody>
+</table>
+
+<!--Show Test Table -->
+<h2>Tests</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Notebook/Test ID</th>
+        <th>Method ID</th>
+        <th>Instrument ID</th>
+        <th>Analyst ID</th>
+        <th>Date Assigned</th>
+        <th>Date Completed</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="form">
+        <form action="/insert" method="post">
+            <td class="empty"></td>
+            <td><input type="number" name="mid"></td>
+            <td><input type="number" name="iid"></td>
+            <td><input type="number" name="aid"></td>
+            <td><input type="date" name="date_assigned"></td>
+            <td class="empty"></td>
+            <td><input type="submit" name="test" value="+"></td>
+        </form>
+    </tr>
+    <tr class="empty_row"></tr>
+    <!--Show test info form database for #each row -->
+    {{#if test}}
+{{#each test}}
+        <tr class="test-row">
+            <form action="/update" method="post">
+                <td class="static">{{this.tid}}</td>
+                <td class="static">{{this.mid}}
+                    <input type="hidden" name="mid" value="{{this.mid}}"></td>
+                <td><input type="number" name="iid" value="{{this.iid}}"></td>
+                <td><input type="number" name="aid" value="{{this.aid}}"></td>
+                <td class="static">{{this.date_assigned}}
+                    <input type="hidden" name="date_assigned"
+                           value="{{this.date_assigned}}"></td>
+                <td><input type="date" name="date_completed"
+                           value="{{this.date_completed}}"</td>
+                <td><input type="hidden" name="tid" value="{{this.tid}}">
+                    <input type="submit" name="test" value="+"></td>
+            </form>
+            <form action="delete" method="post">
+                <td><input type="hidden" name="tid" value="{{this.tid}}">
+                    <input type="submit" name="test" value="-"></td>
+            </form>
+        </tr>
+        <tr>
+            <form action="/insert" method="post">
+                <td><input type="text" name="lot"
+                   value="Enter Lot for Test ID {{this.tid}}"
+                    onfocus="if (this.value == 'Enter Lot for Test ID {{this.tid}}')
+                    this.value='';"></td>
+                <td class="submit"><input type="hidden" name="tid" value="{{this.tid}}">
+                <input type="submit" name="analyses" value="+"></td>
+            </form>
+        </tr>
+        <!--Show analyses info form database for #each row -->
+        <!-- as sub-table for each lot tied to each test -->
+        {{#if ../analyses}}
+        {{#each ../analyses}}
+            {{#equal this.tid ../this.tid}}
+                <tr>
+                    <form action="/delete" method="post">
+                        <td class="static">{{this.lot}}</td>
+                        <td class="submit"><input type="submit" name="analyses" value="-">
+                        <input type="hidden" name="tid" value="{{this.tid}}">
+                        <input type="hidden" name="lot" value="{{this.lot}}"></td>
+                    </form>
+                </tr>
+            {{/equal}}
+        {{/each}}
+            <tr class="empty_row"></tr>
+        {{/if}}
+{{/each}}
+{{/if}}
+    </tbody>
+</table>
+
+
+
+
+
+

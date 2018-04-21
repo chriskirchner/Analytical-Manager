@@ -1,0 +1,110 @@
+body {
+    text-align: center;
+}
+
+h1 {
+    margin: 0px;
+    padding: 0px;
+    color: #033
+}
+
+h3 {
+    margin: 10px;
+    padding: 0px;
+    color: #033
+}
+
+tr.test-row {
+    color: white;
+    font-weight: bold;
+    background-color: gray
+}
+
+table {
+    margin: 0px auto;
+}
+
+td {
+    height: 30px;
+    border: 3px solid gray;
+    border-radius: 5px;
+}
+
+td.button {
+    border: none;
+    display: none;
+}
+
+td.search {
+    font-weight: bold;
+    border: 0px;
+}
+
+td.searchbutton {
+    background-color: grey;
+}
+
+td.directions {
+    border: none;
+    width: 50px;
+    padding-top: 20px;
+    text-align: left;
+    font-size: large;
+}
+
+input.search {
+    background-color: grey;
+    color: white;
+}
+
+table {
+    border-spacing: 5px 5px;
+    margin: 30px auto;
+
+}
+
+input, select{
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+    text-align: center;
+}
+
+form {
+    width: 0px;
+    display: none;
+}
+
+.display {
+    display: inline;
+}
+
+input[value="+"] {
+    background-color: white;
+}
+
+input[value="-"] {
+    background-color: white;
+}
+
+th {
+    background-color: gray;
+    color: white;
+    border-radius: 5px;
+    height: 30px;
+    padding: 0 20px;
+}
+
+.submit {
+    float: left;
+    width: 30px;
+}
+
+td.static {
+    border: 1px solid lightgray;
+}
+
+td.empty {
+    background-color: gray;
+}
