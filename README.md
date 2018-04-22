@@ -29,14 +29,14 @@ System.
 ## Database Design
 ### Entity-Relationship Diagram
 
-This diagram displays the cardinality between entity relationships in the
+This diagram displays the cardinality between entities in the
 Analytical Manager Database that ties all types of analytical resources to a given test.
 
-<p align="center"><img width=60% src="ER.PNG"></a></p>
+<p align="center"><img width=100% src="ER.PNG"></a></p>
 
 ### Database Schema
 
 This blueprint of the database outlines its organizational structure
 for tables and entries.
 
-<p align="center"><img width=60% src="Schema.PNG"></a></p>
+<p align="center"><img width=100% src="Schema.PNG"></a></p>
