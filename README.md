@@ -1,6 +1,6 @@
 # Analytical Manager
 
-<p align="center"><a href="http://159.89.136.195:3001/analytical-manager"><img width=100% src="Analytical.PNG"></a></p>
+<p align="center"><a href="http://159.89.136.195:3001/analytical-manager"><img width=60% src="Analytical.PNG"></a></p>
 
 ## Overview
 
@@ -30,7 +30,7 @@ System.
 ### Entity-Relationship Diagram
 
 This diagram displays the cardinality between entity relationships in the
-Analytical Manager Database.
+Analytical Manager Database that ties all types of analytical resources to a given test.
 
 ![ER Diagram](ER.PNG)
 
