@@ -32,11 +32,11 @@ System.
 This diagram displays the cardinality between entity relationships in the
 Analytical Manager Database that ties all types of analytical resources to a given test.
 
-![ER Diagram](ER.PNG)
+<p align="center">![ER Diagram](ER.PNG)</p>
 
 ### Database Schema
 
 This blueprint of the database outlines its organizational structure
 for tables and entries.
 
-![Schema](Schema.PNG)
+<p align="center">![Schema](Schema.PNG)</p>
